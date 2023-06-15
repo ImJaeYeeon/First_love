@@ -1,7 +1,13 @@
 ﻿# 게임에서 사용할 캐릭터를 정의합니다.
 define m1 = Character('이우주') #남주1 연하 이우주
+define m2 = Character('배진혁') #남주2 동갑 배진혁
+define m3 = Character('지승현') #남주3 연상 지승현
+
+define rightCharacter = Position(xalign = 0.8, yalign = 0.3)
+
 image background_wish = "달에소원.jpg"
 image background_room ="방.jpg"
+image background_happyEnding = "happyending.jpg"
 
 image background1_1 = "bg_우주/급식실.jpg"
 image background1_2 = "bg_우주/운동장.jpg"
@@ -14,8 +20,8 @@ image background2_3 = "bg_진혁/보건실.jpg"
 image background3_1 = "bg_승현/도서관.jpg"
 image background3_2 = "bg_승현/졸업식.jpg"
 
-define m2 = Character('배진혁') #남주2 동갑 배진혁
-define m3 = Character('지승현') #남주3 연상 지승현
+image fairy = im.FactorScale("character/요정.png",0.45)
+
 
 define player_name = "플레이어이름"
 define p = Character("player_name",dynamic = True,color="#0B6121")
@@ -31,10 +37,12 @@ label start:
     p "달님 올해는 꼭 모태솔로 탈출하게 해주세요 .." with fade
     scene background_room
     "아침 7시 알람이 시끄럽게 울린다." with vpunch
+    show fairy at rightCharacter
     "..." "네가 [player_name](이)가 맞느냐"  with zoomin
     "..." "나는 어제 네가 불러낸 달의 요정이다.\n너의 소원을 들어주기 위해 네 앞에 나타났다."
     "..." "세 명의 남자 중 마음에 드는 한 명의 남자를 선택해라\n 그 남자가 너의 남자친구가 될 것이다."
 
+    label choice:
     menu :
         "남자를 골라보자"
 
@@ -43,7 +51,7 @@ label start:
             "아이돌 연습생 연하남 이우주를 선택했습니다."
             m1 "누나 안녕?ㅎㅎ"
             p "누구지? 당황스럽다.."
-            m1 "누나! 저 기억 안 나요?" with vpunch
+            m1 "누나! 저 기억 안 나요?" with zoomin
 
             jump start1
 
@@ -87,6 +95,7 @@ label love1:
     scene background1_1
     "-점심시간(급식실)-"
 
+label cafeteria:
     "급식실에서 우주랑 밥을 먹으니 이목이 쏠린다..."
 
 menu:
@@ -107,7 +116,7 @@ label love2:
 
     scene background1_2
     "-운동장-"
-
+label playground:
     m1 "누나... 저 사실...."
 
     menu:
@@ -131,6 +140,7 @@ label love2:
         
         m1 "중학생 때부터 쭉 누나만을 좋아했어요.. 제가 어떤 사람이어도 누나는 절 사랑해 주실 거 같다는 생각이 들어요."
 
+        label goback:
         m1 "저랑 사귀어 주세요..!!"with vpunch
 
         menu:
@@ -145,11 +155,15 @@ label love2:
                 jump ending4
 
 label love4:
+    scene background_happyEnding
     "이럴수가.. 오늘부터 1일!!"
     "{b}Happy Ending{/b}."
 
-    return
-        
+    menu:
+        "다른 남자도 만나볼래!":
+            jump choice
+        "이대로 끝낼래요!":
+            return
 
 label ending1:
 
@@ -159,9 +173,15 @@ label ending1:
 
     "{b}
     다시 잘 생각 해 봐!!\n
-    Bad Ending{/b}."
+    Bad Ending{/b}."  with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump start1
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label ending2:
     "표정 관리가 안 되기 시작한다."
@@ -169,24 +189,42 @@ label ending2:
     m1 "누나 표정이 왜 그래요?.. 저랑 있는 게 부담스러워요?"
 
     "참고 먹다가 체 해!!"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump cafeteria
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label ending3:
     "말을 잘 들어줬어야지!!"
 
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump playground
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label ending4:
 
     "다 왔는데 이런.. 눈치 좀 챙겨 [player_name]!!!"
 
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump goback
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 
 # 배진혁
@@ -217,6 +255,7 @@ label jin_love2:
     scene background2_3
     "진혁이 부축을 해주며 보건실로 향했지만 보건선생님은 출장을 가셨는지 자리에 계시지 않는다"
     m2 "아... 선생님이 안 계시네."
+    label sick:
     m2 "너만 괜찮으면 내가 치료해줄게."
 
     menu:
@@ -246,25 +285,43 @@ label jin_ending1:
     m2 "아... 그래."
     "진혁이는 멋쩍은듯 서있다 돌아가버렸다"
     "부탁했어야지!!"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump jin_love1
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label jin_ending2:
     m2 "아... 그래 미안."
     "어색한 공기가 흐른다..."
     "부탁했어야지!!"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump sick
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label jin_ending3:
     m2 "그래...? 내가 좀 과했나보네."
     "진혁은 어색하게 웃으며 운동장으로 돌아갔다"
     "부탁했어야지!!"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump jin_love3
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label jin_ending4:
     "그렇게 진혁이의 등에 업혀 교실까지 올라왔다..."
@@ -278,9 +335,13 @@ label jin_ending4:
     "내 고백을 들은 진혁이는 귀가 빨개지고 고개를 푹 숙인다."
     m2 "응... 좋아."
 
+    scene background_happyEnding
     "{b}Happy Ending{/b}."
-
-    return
+    menu:
+        "다른 남자도 만나볼래!":
+            jump choice
+        "이대로 끝낼래요!":
+            return
 
 # 지승현
 
@@ -324,7 +385,7 @@ label seng_love2:
 
 label seng_love3:
     m3 "그래, 좋아!"
-
+label graduation:
     scene background3_2
     "승현 선배의 졸업 당일"
 
@@ -358,43 +419,79 @@ label seng_ending1:
     "선배는 조용히 도서관을 떠난다."
     "같이 했어야지!!"
     "{b}Bad Ending{/b}."
-
-    return
+    
+    menu:
+        "이전으로 돌아갈래요!":
+            jump seng_love1
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label seng_ending2:
     m2 "이건 너무 기초인데.. 아직도 모른다니 실망이야"
     m2 "같이 공부하기로 한 건 없던 걸로 하자"
     "기초 다지고 다시 도전하자"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump seng_love2
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label seng_ending3:
     m2 "내가 미술은 못 해서.."
     "승현은 당황한 표정을 짓더니 이내 나에게 말을 걸지 않았다."
 
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump seng_love2
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label seng_ending4: 
     m3 "미안 지금은 너무 바빠서.."
     "타이밍을 봐야지!!"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump graduation
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label seng_ending5:
     m3 "아.. 가버렸네..."
     "그렇게 난 다시는 선배를 볼 수 없었다."
     "도망치면 안되지!!"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
 
-    return
+    menu:
+        "이전으로 돌아갈래요!":
+            jump seng_love4
+        "남자 선택으로 돌아갈래요!":
+            jump choice
+        "아니요, 이대로 끝낼래요!":
+            return
 
 label seng_ending6:
     p "승현 선배.. 아니 승현 오빠! 사실 예전부터 오빠를 좋아했어요!!!"
 
     m3 "나도 널 좋아했어 우리 사귀자"
 
+    scene background_happyEnding
     "{b}Happy Ending{/b}."
+    menu:
+        "다른 남자도 만나볼래!":
+            jump choice
+        "이대로 끝낼래요!":
+            return
