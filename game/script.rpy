@@ -33,27 +33,35 @@ define p = Character("player_name",dynamic = True,color="#0B6121")
 
 # 여기에서부터 게임이 시작합니다.
 label start:
-
+    play music "audio/달.mp3" fadein 3.0
     $player_name = renpy.input("이름을 지정해주세요. 내 이름은")##화면에 내 이름은 나오고 다음칸에 입력받는 칸이 나온다.
     p "내 이름은 [player_name]"##p는 위에 선언한 캐릭터고, 대화창에 변수값을 나오게 할려면 [변수명]으로 사용한다.
 
     scene background_wish
+    
     p "달님 올해는 꼭 모태솔로 탈출하게 해주세요 .." with fade
+    stop music fadeout 3.0
     scene background_room
+    play music "audio/아침.mp3" fadein 2.0
+    play sound "audio/sound/알람.mp3"
     "아침 7시 알람이 시끄럽게 울린다." with vpunch
+    stop sound fadeout 2.0
+    play sound "audio/sound/펑.mp3"
     show fairy at rightCharacter
     "..." "네가 [player_name](이)가 맞느냐"  with zoomin
     "..." "나는 어제 네가 불러낸 달의 요정이다.\n너의 소원을 들어주기 위해 네 앞에 나타났다."
     "..." "세 명의 남자 중 마음에 드는 한 명의 남자를 선택해라\n 그 남자가 너의 남자친구가 될 것이다."
-
+    play music "audio/선택.mp3" fadein 2.0
     label choice:
     menu :
         "남자를 골라보자"
-
         "이우주":
+            stop music
+            play sound "audio/sound/뾰로롱.mp3"
             scene background1_3
             show boy1
             "아이돌 연습생 연하남 이우주를 선택했습니다."
+            play sound "audio/등굣길.mp3" fadein 2.0
             hide boy1
             show boy1 with dissolve
             m1 "누나 안녕?ㅎㅎ"
@@ -63,6 +71,8 @@ label start:
             jump start1
 
         "배진혁":
+            stop music
+            play sound "audio/sound/뾰로롱.mp3"
             scene background2_1
             show boy2
             "같은 반 축구부 배진혁을 선택했습니다."
@@ -70,6 +80,8 @@ label start:
             jump start2
 
         "지승현":
+            stop music
+            play sound "audio/sound/뾰로롱.mp3"
             scene background3_1
             show boy3
             "전교1등 선배 지승현을 선택했습니다."
@@ -102,6 +114,7 @@ label love1:
 
     m1 "아... 벌써 도착했네. 점심 시간에 찾아갈테니까 그 때 봐요 누나!"
     scene background1_1
+    play music "audio/급식실.mp3"
     "-점심시간(급식실)-"
 
 label cafeteria:
@@ -127,6 +140,7 @@ label love2:
     m1 "아... 누나! 같이 가요!"
 
     scene background1_2
+    play music "audio/운동장.mp3"
     "-운동장-"
 label playground:
     m1 "누나... 저 사실...."
@@ -148,6 +162,7 @@ label playground:
 
         "???"
 
+        play sound "audio/sound/심장소리.mp3"
         "(심장이 쿵쾅대기 시작한다.)" with vpunch
         
         m1 "중학생 때부터 쭉 누나만을 좋아했어요...! 제가 어떤 모습이어도, 누나는 절 진심으로 사랑해 주실 거 같다는 느낌이 들어요."
@@ -163,11 +178,13 @@ label playground:
                 jump love4
 
             "저... 우주야 미안... 난 지금이 좋아.":
-
+                stop sound
                 jump ending4
 
 label love4:
     scene background_happyEnding
+    stop sound 
+    play music "audio/해피엔딩.mp3" fadein 1.0
     "이럴수가... 오늘부터 1일!!"
     "이렇게 귀여운 남자친구가 생기다니!"
     "{b}Happy Ending{/b}."
@@ -183,7 +200,8 @@ label ending1:
     "내가 대답을 잘 한 게 맞을까?"
 
     m1 "누나... 너무해요!!"
-
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}
     다시 잘 생각 해 봐!!\n
     Bad Ending{/b}."  with hpunch
@@ -201,7 +219,8 @@ label ending2:
     "표정관리가 되지 않는다...!"
     
     m1 "저... 누나? 표정이 왜 그래요? 혹시... 저랑 있는 게 부담스러우신 거에요?"
-
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "의도치 않게 상처를 줘버렸잖아..."
     "{b}Bad Ending{/b}." with hpunch
 
@@ -215,7 +234,8 @@ label ending2:
 
 label ending3:
     "꽤 진지해 보였는데 이야기도 들어주지 않다니 너무하네!"
-
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -229,7 +249,8 @@ label ending3:
 label ending4:
 
     "다 왔는데 이런... 눈치 좀 챙겨 [player_name]!!!"
-
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -244,6 +265,7 @@ label ending4:
 # 배진혁
 
 label start2:
+    play music "audio/운동장.mp3" fadein 1.0
     hide boy2
     p "아 오늘 체육 있었지..."
 
@@ -252,7 +274,7 @@ label start2:
     "어, 배진혁...?"
 
 label jin_love1:
-    p "아야!"
+    p "아야!" with vpunch
     "발목을 삐었나..."
     m2 "하, 야 살살 던지라고 했지!" 
     m2 "[player_name], 너 괜찮아? 이리와 보건실 가자."
@@ -268,6 +290,7 @@ label jin_love1:
 
 label jin_love2:
     scene background2_3
+    play music "audio/급식실.mp3"
     "진혁이의 부축을 받으며 보건실로 향했지만 보건 선생님은 자리에 계시지 않는다."
     m2 "선생님이 안 계시네."
     "진혁이는 다친 내 발목을 보더니 한숨을 쉰다."
@@ -287,8 +310,10 @@ label jin_love2:
             jump jin_love3
 
 label jin_love3:
+    play music "audio/보건실.mp3"
     m2 "자... 다 됐다."
 label abuba:
+    stop music
     scene background2_2
     m2 "[player_name], 혼자 못 걷겠지? 업혀. 교실까지 데려다 줄게."
     "내 나이가 몇인데...!"
@@ -305,6 +330,8 @@ label jin_ending1:
     m2 "아... 그래."
     "진혁이는 멋쩍은듯 서있다 돌아가버렸다"
     "부탁했어야지!!"
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -319,6 +346,8 @@ label jin_ending2:
     m2 "아... 그래 미안."
     "어색한 공기가 흐른다..."
     "부탁했어야지!!"
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -333,6 +362,8 @@ label jin_ending3:
     m2 "그래...? 내가 좀 과했나보네."
     "진혁은 어색하게 웃으며 운동장으로 돌아갔다"
     "부탁했어야지!!"
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -344,9 +375,10 @@ label jin_ending3:
             return
 
 label jin_ending4:
+    play music "audio/복도.mp3"
     "그렇게 진혁이의 등에 업혀 교실까지 올라왔다..."
     "그 전부터 진혁이를 좋아했던 나는 이때를 기회로 용기를 내어본다."
-
+    play sound "audio/sound/심장소리.mp3" fadein 2.0
     p "저... 진혁아."
     p "지금 이런 말 하는게 어떻게 들릴지 모르겠지만..."
     p "나, 오래 전부터 널 좋아해왔어."
@@ -356,7 +388,8 @@ label jin_ending4:
     "쟤도 얼굴이 붉어지긴 하는구나..."
 
     m2 "응... 좋아."
-
+    stop sound
+    play music "audio/해피엔딩.mp3" fadein 1.0
     scene background_happyEnding
     "{b}Happy Ending{/b}."
     menu:
@@ -368,6 +401,7 @@ label jin_ending4:
 # 지승현
 
 label start3:
+    play music "audio/도서관.mp3" fadein 3.0
     hide boy3
     "시험기간 도서관에서 침 흘리며 졸고 있는 [player_name]"
     "누군가 다가와 어깨를 톡톡 친다."
@@ -415,6 +449,7 @@ label seng_love3:
 
 label graduation:
     scene background3_2
+    play music "audio/학생소리.wav" fadein 1.0
     "승현 선배의 졸업 당일"
     "이제 선배를 학교에서 볼 수 없다니... 눈물이 앞을 가린다."
 
@@ -429,6 +464,7 @@ label graduation:
 
 label seng_love4:
     scene background3_3
+    play music "audio/복도.mp3" fadein 1.0
     "1년 뒤 3학년이 된 미림이의 it쇼 당일"
     "어, 저기... 설마, 승현 선배?!"
 
@@ -448,6 +484,8 @@ label seng_ending1:
     hide boy3 with dissolve
     "선배는 조용히 도서관을 떠난다."
     "같이 했어야지!!"
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
     
     menu:
@@ -462,6 +500,8 @@ label seng_ending2:
     m2 "이건 너무 기초인데.. 아직도 모른다니 실망이야"
     m2 "같이 공부하기로 한 건 없던 걸로 하자"
     "기초부터 다지고 다시 도전하자"
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -475,7 +515,8 @@ label seng_ending2:
 label seng_ending3:
     m2 "내가 미술은 못 해서.."
     "승현은 당황한 표정을 짓더니 이내 나에게 말을 걸지 않았다."
-
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -489,6 +530,8 @@ label seng_ending3:
 label seng_ending4: 
     m3 "미안 지금은 너무 바빠서.."
     "타이밍을 봐야지!!"
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -503,6 +546,8 @@ label seng_ending5:
     m3 "아.. 가버렸네..."
     "그렇게 난 다시는 선배를 볼 수 없었다."
     "도망치면 안되지!!"
+    stop music
+    play sound "audio/sound/배드엔딩.mp3" fadein 1.0
     "{b}Bad Ending{/b}." with hpunch
 
     menu:
@@ -517,7 +562,8 @@ label seng_ending6:
     p "승현 선배.. 아니 승현 오빠! 사실 예전부터 오빠를 좋아했어요!!!"
 
     m3 "나도 널 좋아했어 우리 사귀자"
-
+    stop music
+    play music "audio/해피엔딩.mp3" fadein 1.0
     scene background_happyEnding
     "{b}Happy Ending{/b}."
     menu:
