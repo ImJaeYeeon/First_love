@@ -6,21 +6,25 @@ define m3 = Character('지승현') #남주3 연상 지승현
 define rightCharacter = Position(xalign = 0.8, yalign = 0.3)
 
 image background_wish = "달에소원.jpg"
-image background_room ="방.jpg"
+image background_room ="re방.jpg"
 image background_happyEnding = "happyending.jpg"
 
 image background1_1 = "bg_우주/급식실.jpg"
-image background1_2 = "bg_우주/운동장.jpg"
-image background1_3 = "bg_우주/교문.jpg"
+image background1_2 = "bg_우주/re운동장.jpg"
+image background1_3 = "bg_우주/re등교길.jpg"
 
-image background2_1 = "bg_진혁/운동장.jpg"
-image background2_2 = "bg_진혁/복도.jpg"
+image background2_1 = "bg_진혁/re운동장.jpg"
+image background2_2 = "bg_진혁/re복도.jpg"
 image background2_3 = "bg_진혁/보건실.jpg"
 
 image background3_1 = "bg_승현/도서관.jpg"
 image background3_2 = "bg_승현/졸업식.jpg"
+image background3_3 = "bg_승현/itshow.jpg"
 
-image fairy = im.FactorScale("character/요정.png",0.45)
+image fairy = im.FactorScale("character/요정.png",0.4)
+image boy1 = im.FactorScale("character/이우주1.png",0.2)
+image boy2 = im.FactorScale("character/배진혁1.png",0.2)
+image boy3 = im.FactorScale("character/지승현1.png",0.2)
 
 
 define player_name = "플레이어이름"
@@ -48,7 +52,10 @@ label start:
 
         "이우주":
             scene background1_3
+            show boy1
             "아이돌 연습생 연하남 이우주를 선택했습니다."
+            hide boy1
+            show boy1 with dissolve
             m1 "누나 안녕?ㅎㅎ"
             p "(응? ...누구지? 조금 당황스럽네...)"
             m1 "어...? 누나! 저 기억 안 나요?" with zoomin
@@ -57,12 +64,14 @@ label start:
 
         "배진혁":
             scene background2_1
+            show boy2
             "같은 반 축구부 배진혁을 선택했습니다."
 
             jump start2
 
         "지승현":
             scene background3_1
+            show boy3
             "전교1등 선배 지승현을 선택했습니다."
 
             jump start3
@@ -198,7 +207,7 @@ label ending2:
 
     menu:
         "이전으로 돌아갈래요!":
-            jump start1
+            jump cafeteria
         "다른 사람을 만나러 갈래요!":
             jump choice
         "아니요, 그냥 이대로 끝낼게요!":
@@ -211,7 +220,7 @@ label ending3:
 
     menu:
         "이전으로 돌아갈래요!":
-            jump start1
+            jump  playground
         "다른 사람을 만나러 갈래요!":
             jump choice
         "아니요, 그냥 이대로 끝낼게요!":
@@ -225,7 +234,7 @@ label ending4:
 
     menu:
         "이전으로 돌아갈래요!":
-            jump start1
+            jump goback
         "다른 사람을 만나러 갈래요!":
             jump choice
         "아니요, 그냥 이대로 끝낼게요!":
@@ -235,10 +244,11 @@ label ending4:
 # 배진혁
 
 label start2:
+    hide boy2
     p "아 오늘 체육 있었지..."
 
     "짝피구...? 내 짝은 누구지?"
-
+    show boy2 with dissolve
     "어, 배진혁...?"
 
 label jin_love1:
@@ -247,7 +257,7 @@ label jin_love1:
     m2 "하, 야 살살 던지라고 했지!" 
     m2 "[player_name], 너 괜찮아? 이리와 보건실 가자."
     m2 "어떻게 보면 내 잘못도 있으니까... 같이 가줄게."
-
+    label go:
     "어, 같이...?"
     menu:
         "아니야, 괜찮아! 나 혼자 갈 수 있어.":
@@ -277,10 +287,10 @@ label jin_love2:
             jump jin_love3
 
 label jin_love3:
-    scene background2_2
     m2 "자... 다 됐다."
+label abuba:
+    scene background2_2
     m2 "[player_name], 혼자 못 걷겠지? 업혀. 교실까지 데려다 줄게."
-
     "내 나이가 몇인데...!"
     menu:
         "아, 아니야! 충분히 혼자 걸을 수 있어.":
@@ -299,7 +309,7 @@ label jin_ending1:
 
     menu:
         "이전으로 돌아갈래요!":
-            jump start1
+            jump go
         "다른 사람을 만나러 갈래요!":
             jump choice
         "아니요, 그냥 이대로 끝낼게요!":
@@ -313,7 +323,7 @@ label jin_ending2:
 
     menu:
         "이전으로 돌아갈래요!":
-            jump start1
+            jump sick
         "다른 사람을 만나러 갈래요!":
             jump choice
         "아니요, 그냥 이대로 끝낼게요!":
@@ -327,7 +337,7 @@ label jin_ending3:
 
     menu:
         "이전으로 돌아갈래요!":
-            jump start1
+            jump abuba
         "다른 사람을 만나러 갈래요!":
             jump choice
         "아니요, 그냥 이대로 끝낼게요!":
@@ -358,9 +368,11 @@ label jin_ending4:
 # 지승현
 
 label start3:
+    hide boy3
     "시험기간 도서관에서 침 흘리며 졸고 있는 [player_name]"
     "누군가 다가와 어깨를 톡톡 친다."
     "졸린 눈을 부비며 일어나자..."
+    show boy3 with dissolve
     "그... 그 전교 1등 지승현... 선배?"
     "황급히 입가에 묻은 침자국을 지우며 고개를 숙인다."
 
@@ -433,16 +445,17 @@ label seng_love4:
 
 label seng_ending1:
     m3 "그래.. 나랑 공부하기 싫구나.."
+    hide boy3 with dissolve
     "선배는 조용히 도서관을 떠난다."
     "같이 했어야지!!"
-    "{b}Bad Ending{/b}."
+    "{b}Bad Ending{/b}." with hpunch
     
     menu:
         "이전으로 돌아갈래요!":
             jump seng_love1
-        "남자 선택으로 돌아갈래요!":
+        "다른 사람을 만나러 갈래요!":
             jump choice
-        "아니요, 이대로 끝낼래요!":
+        "아니요, 그냥 이대로 끝낼게요!":
             return
 
 label seng_ending2:
@@ -454,9 +467,9 @@ label seng_ending2:
     menu:
         "이전으로 돌아갈래요!":
             jump seng_love2
-        "남자 선택으로 돌아갈래요!":
+        "다른 사람을 만나러 갈래요!":
             jump choice
-        "아니요, 이대로 끝낼래요!":
+        "아니요, 그냥 이대로 끝낼게요!":
             return
 
 label seng_ending3:
@@ -468,9 +481,9 @@ label seng_ending3:
     menu:
         "이전으로 돌아갈래요!":
             jump seng_love2
-        "남자 선택으로 돌아갈래요!":
+        "다른 사람을 만나러 갈래요!":
             jump choice
-        "아니요, 이대로 끝낼래요!":
+        "아니요, 그냥 이대로 끝낼게요!":
             return
 
 label seng_ending4: 
@@ -481,9 +494,9 @@ label seng_ending4:
     menu:
         "이전으로 돌아갈래요!":
             jump graduation
-        "남자 선택으로 돌아갈래요!":
+        "다른 사람을 만나러 갈래요!":
             jump choice
-        "아니요, 이대로 끝낼래요!":
+        "아니요, 그냥 이대로 끝낼게요!":
             return
 
 label seng_ending5:
@@ -495,9 +508,9 @@ label seng_ending5:
     menu:
         "이전으로 돌아갈래요!":
             jump seng_love4
-        "남자 선택으로 돌아갈래요!":
+        "다른 사람을 만나러 갈래요!":
             jump choice
-        "아니요, 이대로 끝낼래요!":
+        "아니요, 그냥 이대로 끝낼게요!":
             return
 
 label seng_ending6:
@@ -508,7 +521,7 @@ label seng_ending6:
     scene background_happyEnding
     "{b}Happy Ending{/b}."
     menu:
-        "다른 남자도 만나볼래!":
+        "역시 내 취향은 아니야 다른 사람을 만나볼래!":
             jump choice
-        "이대로 끝낼래요!":
+        "다른 사람은 됐어요! 이대로 끝낼래요!":
             return
