@@ -47,7 +47,7 @@ define p = Character("player_name",dynamic = True,color="#0B6121")
 
 # 여기에서부터 게임이 시작합니다.
 label start:
-    play music "audio/달.mp3" fadein 3.0
+    play music "audio/moon.mp3" fadein 3.0
     $player_name = renpy.input("이름을 지정해주세요. 내 이름은")##화면에 내 이름은 나오고 다음칸에 입력받는 칸이 나온다.
     p "내 이름은 [player_name]"##p는 위에 선언한 캐릭터고, 대화창에 변수값을 나오게 할려면 [변수명]으로 사용한다.
 
@@ -56,27 +56,27 @@ label start:
     p "달님 올해는 꼭 모태솔로 탈출하게 해주세요 .." with fade
     stop music fadeout 3.0
     scene background_room
-    play music "audio/아침.mp3" fadein 2.0
-    play sound "audio/sound/알람.mp3"
+    play music "audio/morning.mp3" fadein 2.0
+    play sound "audio/sound/alarm.mp3"
     "아침 7시 알람이 시끄럽게 울린다." with vpunch
     stop sound fadeout 2.0
-    play sound "audio/sound/바람.mp3"
+    play sound "audio/sound/wind.mp3"
     show fairy at rightCharacter
     "..." "네가 [player_name](이)가 맞느냐"  with zoomin
     "..." "나는 어제 네가 불러낸 달의 요정이다.\n너의 소원을 들어주기 위해 네 앞에 나타났다."
     "..." "세 명의 남자 중 마음에 드는 한 명의 남자를 선택해라\n 그 남자가 너의 남자친구가 될 것이다."
     stop sound
-    play music "audio/선택.mp3" fadein 2.0
+    play music "audio/choice.mp3" fadein 2.0
     label choice:
     menu :
         "남자를 골라보자"
         "이우주":
             stop music
-            play sound "audio/sound/뾰로롱.mp3"
+            play sound "audio/sound/tarara.mp3"
             scene background1_3
             show boy1
             "아이돌 연습생 연하남 이우주를 선택했습니다."
-            play sound "audio/등굣길.mp3" fadein 2.0
+            play sound "audio/toSchool.mp3" fadein 2.0
             hide boy1
             show boy1 5 with dissolve
             m1 "누나 안녕?ㅎㅎ"
@@ -89,7 +89,7 @@ label start:
 
         "배진혁":
             stop music
-            play sound "audio/sound/뾰로롱.mp3"
+            play sound "audio/sound/tarara.mp3"
             scene background2_1
             show boy2
             "같은 반 축구부 배진혁을 선택했습니다."
@@ -98,7 +98,7 @@ label start:
 
         "지승현":
             stop music
-            play sound "audio/sound/뾰로롱.mp3"
+            play sound "audio/sound/tarara.mp3"
             scene background3_1
             show boy3
             "전교1등 선배 지승현을 선택했습니다."
@@ -109,7 +109,7 @@ label start:
 #이우주
 
 label start1:
-    play music "audio/등굣길.mp3" fadein 2.0
+    play music "audio/toSchool.mp3" fadein 2.0
     "뭐라고 대답해야하지..."
     menu:
         "글쎄... 잘 모르겠는데?":
@@ -118,8 +118,8 @@ label start1:
             jump love1
 
 label love1:
-    play music "audio/등굣길.mp3" fadein 2.0
-    play sound "audio/sound/심장소리.wav"loop
+    play music "audio/toSchool.mp3" fadein 2.0
+    play sound "audio/sound/heartBeat.wav"loop
     "두근두근..."
     show boy1 5 with dissolve
     stop sound
@@ -131,11 +131,11 @@ label love1:
     m1 "아... 벌써 도착했네. 점심 시간에 찾아갈테니까 그 때 봐요 누나!"
     hide boy1 5
     scene background1_1
-    play music "audio/급식실.mp3"
+    play music "audio/cafeteria.mp3"
     "-점심시간(급식실)-"
 
 label cafeteria:
-    play music "audio/급식실.mp3"
+    play music "audio/cafeteria.mp3"
     show boy1 6 with dissolve
     "우주가 정말 아이돌 연습생이긴 한가보다..."
     "같이 밥을 먹으니 아이들의 이목이 쏠리기 시작한다."
@@ -152,7 +152,7 @@ menu:
         jump love2
 
 label love2:
-    play music "audio/급식실.mp3"
+    play music "audio/cafeteria.mp3"
     "아... 더 이상 못 참겠어!"
     show boy1 4 with dissolve
     p "우주야 미안, 나 먼저 가볼게! 마저 먹고 나와."
@@ -160,10 +160,10 @@ label love2:
     m1 "아... 누나! 같이 가요!"
     hide boy1 4
     scene background1_2
-    play music "audio/운동장.mp3"
+    play music "audio/playground.mp3"
     "-운동장-"
 label playground:
-    play music "audio/운동장.mp3"
+    play music "audio/playground.mp3"
     show boy1 3 with dissolve
 
     m1 "누나... 저 사실...."
@@ -180,20 +180,20 @@ label playground:
             jump love3
         
     label love3:
-        play music "audio/운동장.mp3"
+        play music "audio/playground.mp3"
         show boy1 6 with dissolve
         m1 "저.. "
 
         "???"
         show boy1 5 with dissolve
-        play sound "audio/sound/심장소리.wav"
+        play sound "audio/sound/heartBeat.wav"loop
         "(심장이 쿵쾅대기 시작한다.)" with vpunch
         
         m1 "중학생 때부터 쭉 누나만을 좋아했어요...! 제가 어떤 모습이어도, 누나는 절 진심으로 사랑해 주실 거 같다는 느낌이 들어요."
 
         label goback:
-        play music "audio/운동장.mp3"
-        play sound "audio/sound/심장소리.wav"
+        play music "audio/playground.mp3"
+        play sound "audio/sound/heartBeat.wav"loop
         show boy1 6 with dissolve
         m1 "저랑... 사귀어 주세요...!!"with vpunch
 
@@ -211,7 +211,7 @@ label playground:
 label love4:
     scene background_happyEnding
     stop sound 
-    play music "audio/해피엔딩.mp3" fadein 1.0
+    play music "audio/happyEnding_2.mp3" fadein 1.0
     show boy1 with dissolve
     "이럴수가... 오늘부터 1일!!"
     "이렇게 귀여운 남자친구가 생기다니!"
@@ -295,7 +295,7 @@ label ending4:
 # 배진혁
 
 label start2:
-    play music "audio/운동장.mp3" fadein 1.0
+    play music "audio/playground.mp3" fadein 1.0
     hide boy2
     p "아 오늘 체육 있었지..."
 
@@ -322,7 +322,7 @@ label jin_love1:
 label jin_love2:
     hide boy2 3
     scene background2_3
-    play music "audio/급식실.mp3"
+    play music "audio/cafeteria.mp3"
     "진혁이의 부축을 받으며 보건실로 향했지만 보건 선생님은 자리에 계시지 않는다."
     show boy2 3 with dissolve
     m2 "선생님이 안 계시네."
@@ -343,7 +343,7 @@ label jin_love2:
             jump jin_love3
 
 label jin_love3:
-    play music "audio/보건실.mp3"
+    play music "audio/healthRoom.mp3"
     show boy2 with dissolve
     m2 "자... 다 됐다."
 label abuba:
@@ -413,7 +413,7 @@ label jin_ending3:
 
 label jin_ending4:
     hide boy2
-    play music "audio/복도.mp3"
+    play music "audio/hallway.mp3"
     "그렇게 진혁이의 등에 업혀 교실까지 올라왔다..."
     show boy2 with dissolve
     "그 전부터 진혁이를 좋아했던 나는 이때를 기회로 용기를 내어본다."
@@ -428,7 +428,7 @@ label jin_ending4:
 
     m2 "응... 좋아."
     stop sound
-    play music "audio/해피엔딩.mp3" fadein 1.0
+    play music "audio/happyEnding_1.mp3" fadein 1.0
     scene background_happyEnding
     show boy2 with dissolve
     "{b}Happy Ending{/b}."
@@ -441,7 +441,7 @@ label jin_ending4:
 # 지승현
 
 label start3:
-    play music "audio/도서관.mp3" fadein 3.0
+    play music "audio/library.mp3" fadein 3.0
     hide boy3
     "시험기간 도서관에서 침 흘리며 졸고 있는 [player_name]"
     "누군가 다가와 어깨를 톡톡 친다."
@@ -453,7 +453,7 @@ label start3:
     p "아, 그... 감사합니다!"
 
 label seng_love1:
-    play music "audio/도서관.mp3" fadein 3.0
+    play music "audio/library.mp3" fadein 3.0
     show boy3 with dissolve
     m3 "뭘 감사할 거 까지야. [player_name]... 맞지? 공부 중인 거 같던데, 같이 할래?"
     "내 이름은 어떻게..."
@@ -468,7 +468,7 @@ label seng_love1:
             jump seng_love2
 
 label seng_love2:
-    play music "audio/도서관.mp3" fadein 3.0
+    play music "audio/library.mp3" fadein 3.0
     show boy3 2 with dissolve
     m3 "그래, 좋아 같이 공부하자 ㅎㅎ"
     m3 "무슨 공부 도와줄까?"
@@ -487,13 +487,13 @@ label seng_love2:
             jump seng_love3
 
 label seng_love3:
-    play music "audio/도서관.mp3" fadein 3.0
+    play music "audio/library.mp3" fadein 3.0
     m3 "그래, 리액트 좋네. 옆에 앉아도 되지?"
 
 label graduation:
     hide boy3 2
     scene background3_2
-    play music "audio/학생소리.wav" fadein 1.0
+    play music "audio/student.wav" fadein 1.0
     "승현 선배의 졸업 당일"
     show boy3 with dissolve
     "이제 선배를 학교에서 볼 수 없다니... 눈물이 앞을 가린다."
@@ -509,7 +509,7 @@ label graduation:
 
 label seng_love4:
     scene background3_3
-    play music "audio/복도.mp3" fadein 1.0
+    play music "audio/hallway.mp3" fadein 1.0
     "1년 뒤 3학년이 된 미림이의 it쇼 당일"
     "어, 저기... 설마, 승현 선배?!"
 
@@ -525,7 +525,7 @@ label seng_love4:
             jump seng_ending5
 
 label seng_ending1:
-    play music "audio/도서관.mp3" fadein 3.0
+    play music "audio/library.mp3" fadein 3.0
     show boy3 3 with dissolve
     m3 "그래.. 나랑 공부하기 싫구나.."
     hide boy3 3
@@ -544,7 +544,7 @@ label seng_ending1:
             return
 
 label seng_ending2:
-    play music "audio/도서관.mp3" fadein 3.0
+    play music "audio/library.mp3" fadein 3.0
     show boy3 3 with dissolve
     m2 "이건 너무 기초인데.. 아직도 모른다니 실망이야"
     m2 "같이 공부하기로 한 건 없던 걸로 하자"
@@ -563,7 +563,7 @@ label seng_ending2:
             return
 
 label seng_ending3:
-    play music "audio/도서관.mp3" fadein 3.0
+    play music "audio/library.mp3" fadein 3.0
     show boy3 3 with dissolve
     m2 "내가 미술은 못 해서.."
     "승현은 당황한 표정을 짓더니 이내 나에게 말을 걸지 않았다."
@@ -580,7 +580,7 @@ label seng_ending3:
             return
 
 label seng_ending4: 
-    play music "audio/학생소리.wav" fadein 1.0
+    play music "audio/student.wav" fadein 1.0
     show boy3 3 with dissolve
     m3 "미안 지금은 너무 바빠서.."
     "타이밍을 봐야지!!"
@@ -597,7 +597,7 @@ label seng_ending4:
             return
 
 label seng_ending5:
-    play music "audio/학생소리.wav" fadein 1.0
+    play music "audio/student.wav" fadein 1.0
     m3 "아.. 가버렸네..."
     "그렇게 난 다시는 선배를 볼 수 없었다."
     "도망치면 안되지!!"
@@ -618,7 +618,7 @@ label seng_ending6:
 
     m3 "나도 널 좋아했어 우리 사귀자"
     stop music
-    play music "audio/해피엔딩.mp3" fadein 1.0
+    play music "audio/happyEnding_3.mp3" fadein 1.0
     scene background_happyEnding
     show boy3 with dissolve
     "{b}Happy Ending{/b}."
